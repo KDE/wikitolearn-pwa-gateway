@@ -1,0 +1,15 @@
+version: '3.4'
+services:
+  pwa-gateway:
+    build:
+      context: .
+      args:
+        SERVICE_PORT: ${SERVICE_PORT}
+    image: wikitolearn/pwa-gateway
+    environment:
+      KEYCLOAK_URI: ${KEYCLOAK_URI}
+      COURSE_MIDTIER_URI: ${COURSE_MIDTIER_URI}
+      SERVICE_PORT: ${SERVICE_PORT}
+    ports:
+      - ${SERVICE_PORT}:${SERVICE_PORT}
+    restart: on-failure

@@ -1,0 +1,28 @@
+zuul:
+  prefix: /api
+  sensitive-headers: Cookie,Set-Cookie
+  routes:
+    courses:
+      url: ${COURSE_MIDTIER_URI}/**
+security:
+    basic:
+        enabled: false
+    oauth2:
+        resource:
+            filter-order: 3
+            user-info-uri: ${KEYCLOAK_URI}/auth/realms/wikitolearn/protocol/openid-connect/userinfo
+            token-info-uri: ${KEYCLOAK_URI}/auth/realms/wikitolearn/protocol/openid-connect/token/introspect
+            prefer-token-info: false
+            jwt:
+                key-uri: ${KEYCLOAK_URI}/auth/realms/wikitolearn
+logging:
+  pattern:
+     file: '%d{"yyyy-MM-dd HH:mm:ss,SSS"} %-5level [%c] \(%thread\) : %msg%n'
+spring:
+  application:
+    name: PWAGateway
+  output:
+    ansi:
+      enabled: DETECT
+server:
+  port: ${SERVICE_PORT}
