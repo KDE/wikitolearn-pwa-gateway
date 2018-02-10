@@ -1,9 +1,13 @@
 zuul:
-  prefix: /api
+  prefix: /api/v1
   sensitive-headers: Cookie,Set-Cookie
   routes:
     courses:
-      url: ${COURSE_MIDTIER_URI}/**
+      url: ${COURSE_MIDTIER_URI}/courses
+      path: /courses/**
+    pages:
+      url: ${COURSE_MIDTIER_URI}/pages
+      path: /pages/**
 security:
     basic:
         enabled: false
