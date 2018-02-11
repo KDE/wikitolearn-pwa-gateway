@@ -12,4 +12,3 @@ services:
       SERVICE_PORT: ${SERVICE_PORT}
     ports:
       - ${SERVICE_PORT}:${SERVICE_PORT}
-    restart: on-failure
