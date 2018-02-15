@@ -1,5 +1,6 @@
 package org.wikitolearn.gateway.pwa.config;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -7,6 +8,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,7 +22,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableResourceServer
@@ -39,8 +46,27 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
       .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     .and()
       .authorizeRequests()
+      .antMatchers(HttpMethod.HEAD).permitAll()
+      .antMatchers(HttpMethod.OPTIONS).permitAll()
       .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-      .antMatchers("/api/**").authenticated();
+      .antMatchers("/api/**").authenticated()
+    .and()
+      .cors()
+    .and()
+      .csrf()
+      .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+  }
+  
+  @Bean
+  @Order(Ordered.HIGHEST_PRECEDENCE)
+  public CorsConfigurationSource corsConfigurationSource() {
+      final CorsConfiguration configuration = new CorsConfiguration();
+      configuration.setAllowedOrigins(Arrays.asList("*"));
+      configuration.setAllowedMethods(Arrays.asList("*"));
+      configuration.setAllowedHeaders(Arrays.asList("*"));
+      final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+      source.registerCorsConfiguration("/**", configuration);
+      return source;
   }
 
   @Override
