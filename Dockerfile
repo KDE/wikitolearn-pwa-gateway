@@ -1,8 +1,10 @@
 # Builder image
 FROM maven:3.5-jdk-8 as builder
-COPY . /home/root/build/
 WORKDIR /home/root/build/
-RUN mvn package -DskipTests
+COPY pom.xml /home/root/build/
+RUN mvn package -DskipTests --fail-never
+COPY . /home/root/build/
+RUN mvn -o package -DskipTests
 
 # Executor image
 FROM openjdk:8-jre-alpine
