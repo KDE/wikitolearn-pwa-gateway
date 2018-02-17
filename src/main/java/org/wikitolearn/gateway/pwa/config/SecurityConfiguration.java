@@ -51,12 +51,9 @@ public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
       .antMatchers(HttpMethod.GET, "/api/**").permitAll()
       .antMatchers("/api/**").authenticated()
     .and()
-      .cors()
-    .and()
-      .csrf()
-      .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+      .cors();
   }
-  
+
   @Bean
   @Order(Ordered.HIGHEST_PRECEDENCE)
   public CorsConfigurationSource corsConfigurationSource() {
