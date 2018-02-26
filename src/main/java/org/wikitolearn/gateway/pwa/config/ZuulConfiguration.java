@@ -5,4 +5,5 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableZuulProxy
-public class ZuulConfiguration {}
+public class ZuulConfiguration {
+}

@@ -12,6 +12,7 @@ FROM openjdk:8-jre-alpine
 ARG SERVICE_PORT
 COPY --from=builder /srv/app/target/*.jar \
 /srv/app/app.jar
+COPY ./src/main/resources/client-nonprod.jks /srv/app/client-nonprod.jks
 WORKDIR /srv/app/
 EXPOSE $SERVICE_PORT
 ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]

@@ -1,4 +1,14 @@
+# Spring properties
+spring:
+  application:
+    name: PWAGateway
+  output:
+    ansi:
+      enabled: DETECT
+
+# Zuul properties
 zuul:
+  sslHostnameValidationEnabled: false
   prefix: /api/v1
   sensitive-headers: Cookie,Set-Cookie
   routes:
@@ -8,6 +18,8 @@ zuul:
     pages:
       url: ${COURSE_MIDTIER_URI}/pages
       path: /pages/**
+
+# Security properties
 security:
     basic:
         enabled: false
@@ -19,14 +31,22 @@ security:
             prefer-token-info: false
             jwt:
                 key-uri: ${KEYCLOAK_URI}/auth/realms/${KEYCLOAK_AUTH_REALM}
+
+# Loggin properties
 logging:
   pattern:
      file: '%d{"yyyy-MM-dd HH:mm:ss,SSS"} %-5level [%c] \(%thread\) : %msg%n'
-spring:
-  application:
-    name: PWAGateway
-  output:
-    ansi:
-      enabled: DETECT
+     console: '%d{"yyyy-MM-dd HH:mm:ss,SSS"} %-5level [%c] \(%thread\) : %msg%n'
+
+# Server properties
 server:
   port: ${SERVICE_PORT}
+  ssl:
+    enabled: ${SSL_ENABLED}
+    key-store: file:./gateway-keystore.jks
+    key-store-password: changeme
+    key-alias: client
+    key-password: changeme
+    trust-store: file:./gateway-truststore.jks
+    trust-store-password: changeme
+    client-auth: ${MTLS_STATUS}
