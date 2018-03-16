@@ -43,10 +43,10 @@ server:
   port: ${SERVICE_PORT}
   ssl:
     enabled: ${SSL_ENABLED}
-    key-store: file:./gateway-keystore.jks
+    key-store: file:./app-keystore.jks
     key-store-password: changeme
     key-alias: client
     key-password: changeme
-    trust-store: file:./gateway-truststore.jks
+    trust-store: file:./app-truststore.jks
     trust-store-password: changeme
     client-auth: ${MTLS_STATUS}
