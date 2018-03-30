@@ -1,6 +1,5 @@
 # Builder image
-FROM maven:3.5-jdk-8 as builder
-ENV MAVEN_OPTS=-Dmaven.repo.local=/srv/.m2/
+FROM maven:3.5-jdk-8-alpine as builder
 WORKDIR /srv/app/
 COPY pom.xml .
 RUN mvn -B -C -T 1C org.apache.maven.plugins:maven-dependency-plugin:3.0.2:go-offline
