@@ -15,6 +15,9 @@ zuul:
     courses:
       url: ${COURSE_MIDTIER_URI}/courses
       path: /courses/**
+    chapters:
+      url: ${COURSE_MIDTIER_URI}/chapters
+      path: /chapters/**
     pages:
       url: ${COURSE_MIDTIER_URI}/pages
       path: /pages/**
