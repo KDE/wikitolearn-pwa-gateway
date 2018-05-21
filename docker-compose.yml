@@ -5,7 +5,7 @@ services:
       context: .
       args:
         SERVICE_PORT: ${SERVICE_PORT}
-    image: "${DOCKER_REGISTRY}wikitolearn/pwa-gateway"
+    image: "${DOCKER_REGISTRY}wikitolearn/pwa-gateway:${DOCKER_IMAGE_PWA_GATEWAY_TAG}"
     environment:
       KEYCLOAK_URI: ${KEYCLOAK_URI}
       KEYCLOAK_AUTH_REALM: ${KEYCLOAK_AUTH_REALM}
