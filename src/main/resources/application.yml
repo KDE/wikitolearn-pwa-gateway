@@ -12,6 +12,9 @@ zuul:
   prefix: /api/v1
   sensitive-headers: Cookie,Set-Cookie
   routes:
+    history:
+      url: ${COURSE_MIDTIER_URI}/history/courses
+      path: /history/courses/**
     courses:
       url: ${COURSE_MIDTIER_URI}/courses
       path: /courses/**
