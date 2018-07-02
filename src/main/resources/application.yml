@@ -32,9 +32,9 @@ security:
             user-info-uri: ${KEYCLOAK_URI}/auth/realms/${KEYCLOAK_AUTH_REALM}/protocol/openid-connect/userinfo
             token-info-uri: ${KEYCLOAK_URI}/auth/realms/${KEYCLOAK_AUTH_REALM}/protocol/openid-connect/token/introspect
             prefer-token-info: false
-            jwt:
-                key-uri: ${KEYCLOAK_URI}/auth/realms/${KEYCLOAK_AUTH_REALM}
-
+            jwk:
+              key-set-uri: ${KEYCLOAK_URI}/auth/realms/${KEYCLOAK_AUTH_REALM}/protocol/openid-connect/certs
+              
 # Loggin properties
 logging:
   pattern:
