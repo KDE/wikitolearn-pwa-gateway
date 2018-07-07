@@ -6,6 +6,19 @@ spring:
     ansi:
       enabled: DETECT
 
+# Management properties
+management:
+  endpoints:
+    web:
+      base-path: /_meta
+      path-mapping:
+        health: status
+      exposure:
+        include: health,info,metrics
+  health:
+    defaults:
+      enabled: false
+
 # Zuul properties
 zuul:
   sslHostnameValidationEnabled: false
