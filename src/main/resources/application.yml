@@ -22,21 +22,24 @@ management:
 # Zuul properties
 zuul:
   sslHostnameValidationEnabled: false
-  prefix: /api/v1
+  prefix: /api
   sensitive-headers: Cookie,Set-Cookie
   routes:
     history:
-      url: ${COURSE_MIDTIER_URI}/history/courses
-      path: /history/courses/**
+      url: ${COURSE_MIDTIER_URI}/v1/history/courses
+      path: /v1/history/courses/**
     courses:
-      url: ${COURSE_MIDTIER_URI}/courses
-      path: /courses/**
+      url: ${COURSE_MIDTIER_URI}/v1/courses
+      path: /v1/courses/**
     chapters:
-      url: ${COURSE_MIDTIER_URI}/chapters
-      path: /chapters/**
+      url: ${COURSE_MIDTIER_URI}/v1/chapters
+      path: /v1/chapters/**
     pages:
-      url: ${COURSE_MIDTIER_URI}/pages
-      path: /pages/**
+      url: ${COURSE_MIDTIER_URI}/v1/pages
+      path: /v1/pages/**
+    math:
+      url: ${MATH_MIDTIER_URI}/v1/math
+      path: /v1/math/**
 
 # Security properties
 security:
